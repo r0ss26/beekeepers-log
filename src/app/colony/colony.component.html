@@ -1,0 +1,25 @@
+<div class="container" *ngIf="colony">
+  <mat-card>
+    <mat-card-title> ID: {{ colony.id }} </mat-card-title>
+    <mat-card-content>
+      <p>Bees: {{ colony.bees }}</p>
+      <p>Hives: {{ colony.hives }}</p>
+      <hr />
+      Next Collection:
+      {{
+        (colony.collections[0] ? colony.collections[0].date : colony.created)
+          | futureDate
+          | date
+      }}
+      <p>Amount (grams): {{ amount }}</p>
+      <hr />
+      <p>Overproduction (since last collection date): {{ overproduction | number }}</p>
+    </mat-card-content>
+  </mat-card>
+  <br />
+  <app-collections-history
+    *ngIf="colony.id"
+    [collections]="colony.collections"
+    [colonyId]="colony.id"
+  ></app-collections-history>
+</div>
