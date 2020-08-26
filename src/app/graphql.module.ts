@@ -5,7 +5,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { Colony } from './types';
 import gql from 'graphql-tag';
 
-const uri = 'http://localhost:8080/v1/graphql';
+const uri = 'https://selected-shiner-70.hasura.app/v1/graphql';
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
     link: httpLink.create({ uri }),
