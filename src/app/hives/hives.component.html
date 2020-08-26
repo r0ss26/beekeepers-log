@@ -10,7 +10,21 @@
     <!-- overproduction column -->
     <ng-container matColumnDef="overproduction">
       <th mat-header-cell *matHeaderCellDef>Overproduction</th>
-      <td mat-cell *matCellDef="let colony">{{ colony.overproduction | number  }}</td>
+      <td mat-cell *matCellDef="let colony">
+        {{ colony.overproduction | number }}
+      </td>
+    </ng-container>
+
+    <!-- overproduction column -->
+    <ng-container matColumnDef="addHive">
+      <th mat-header-cell *matHeaderCellDef>Add Hive</th>
+      <td mat-cell *matCellDef="let colony">
+        <app-new-hive
+          [colonyId]="colony.id"
+          [overproduction]="colony.overproduction"
+          [hives]="colony.hives"
+        ></app-new-hive>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

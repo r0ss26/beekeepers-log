@@ -29,6 +29,7 @@ export class ColoniesComponent implements OnInit, OnDestroy {
     'hives',
     'collectionDate',
     'overproduction',
+    'addHive',
     'addCollection',
   ];
 

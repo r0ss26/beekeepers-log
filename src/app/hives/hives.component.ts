@@ -17,7 +17,7 @@ export class HivesComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>
 
-  displayedColumns = ['colony', 'overproduction'];
+  displayedColumns = ['colony', 'overproduction', 'addHive'];
 
   constructor(private coloniesService: ColoniesService) {}
 

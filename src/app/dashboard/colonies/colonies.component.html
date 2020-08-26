@@ -28,6 +28,18 @@
       <td mat-cell *matCellDef="let colony">{{ colony.hives | number }}</td>
     </ng-container>
 
+    <!-- new hive column -->
+    <ng-container matColumnDef="addHive">
+      <th mat-header-cell *matHeaderCellDef>Add Hive</th>
+      <td mat-cell *matCellDef="let colony">
+        <app-new-hive
+          [colonyId]="colony.id"
+          [overproduction]="colony.overproduction"
+          [hives]="colony.hives"
+        ></app-new-hive>
+      </td>
+    </ng-container>
+
     <!-- collection date column -->
     <ng-container matColumnDef="collectionDate">
       <th mat-header-cell *matHeaderCellDef>Next Colection Date</th>

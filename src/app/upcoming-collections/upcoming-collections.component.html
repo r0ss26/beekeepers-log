@@ -51,7 +51,7 @@
         *matCellDef="let colony"
         [ngStyle]="{ color: colony.overproduction >= 150 ? 'red' : 'black' }"
       >
-        {{ colony.overproduction }}
+        {{ colony.overproduction | number }}
       </td>
     </ng-container>
 
