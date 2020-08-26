@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -10,9 +10,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class NewCollectionFormComponent implements OnInit {
 
   newCollectionForm = new FormGroup({
-    amount: new FormControl(''),
-    date: new FormControl('')
+    amount: new FormControl('', [Validators.required]),
+    date: new FormControl(new Date()),
+    newHives: new FormControl()
   })
+
+  get amount() { return this.newCollectionForm.get('amount')}
+  get date() { return this.newCollectionForm.get('date')}
+  get newHives() { return this.newCollectionForm.get('newHives')}
 
   constructor(private dialogRef: MatDialogRef<NewCollectionFormComponent>) { }
 
@@ -23,7 +28,9 @@ export class NewCollectionFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  save() {  
-    this.dialogRef.close(this.newCollectionForm.value)
+  save() { 
+    console.log(this.newCollectionForm.value);
+     
+    if (this.newCollectionForm.valid) this.dialogRef.close(this.newCollectionForm.value)
   }
 }

@@ -1,16 +1,24 @@
 <h2 mat-dialog-title>Add a Collection</h2>
+<div *ngIf="amount.invalid && (amount.dirty || amount.touched)">
+  <div *ngIf="amount.errors.required" class="alert">
+    Amount is required.
+  </div>
+</div>
 <mat-dialog-content [formGroup]="newCollectionForm">
-
   <mat-form-field appearance="standard">
     <mat-label>Amount</mat-label>
-    <input matInput formControlName="amount">
+    <input type="number" matInput formControlName="amount" />
   </mat-form-field>
-  <br>
+  <br />
   <mat-form-field appearance="standard">
     <mat-label>Date</mat-label>
-    <input matInput formControlName="date">
+    <input matInput formControlName="date" />
   </mat-form-field>
-
+  <br />
+  <mat-form-field>
+    <mat-label>New Hives</mat-label>
+    <input type="number" matInput formControlName="newHives" />
+  </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>

@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { MatDialog } from '@angular/material/dialog';
 import { ColoniesService } from '../colonies.service';
 import { NewCollectionFormComponent } from './new-collection-form/new-collection-form.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-collection',
@@ -11,6 +12,9 @@ import { NewCollectionFormComponent } from './new-collection-form/new-collection
 })
 export class NewCollectionComponent implements OnInit {
   @Input() colonyId: string;
+  @Input() hives: number;
+
+  private subscriptions = new Subscription();
 
   constructor(
     public dialog: MatDialog,
@@ -20,16 +24,34 @@ export class NewCollectionComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(NewCollectionFormComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-      
-      if (result)
-        this.coloniesService.createCollection(
-          result.amount,
-          this.colonyId,
-          new Date()
+
+      if (result) {
+        this.subscriptions.add(
+          this.coloniesService
+            .createCollection(
+              result.amount,
+              this.colonyId,
+              result.date
+            )
+            .subscribe()
         );
+
+        if (result.newHives) {
+          console.log(this.colonyId);
+          
+          this.subscriptions.add(
+            this.coloniesService
+              .updateHives(this.colonyId, this.hives + result.newHives)
+              .subscribe()
+          );
+        }
+      }
     });
   }
 
   ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    if (this.subscriptions) this.subscriptions.unsubscribe();
+  }
 }
