@@ -4,6 +4,7 @@ import { Colonies } from '../../generated/graphql';
 import { ColoniesService } from '../colonies.service';
 import { GetColonyAndCollectionsQuery } from '../../generated/graphql';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 import { calculateOverproduction } from '../../utils/helpers'
 
@@ -21,7 +22,8 @@ export class ColonyComponent implements OnInit {
 
   constructor(
     private coloniesService: ColoniesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
