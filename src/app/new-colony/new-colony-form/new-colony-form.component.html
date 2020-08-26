@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Add a Colony</h2>
+<div *ngIf="bees.invalid && (bees.dirty || bees.touched)">
+  <div *ngIf="bees.errors.required" class="alert">
+    Number of bees is required.
+  </div>
+</div>
+<mat-dialog-content [formGroup]="newColonyForm">
+  <mat-form-field appearance="standard">
+    <mat-label>No. Bees</mat-label>
+    <input type="number" matInput formControlName="bees" />
+  </mat-form-field>
+  <br />
+  <div *ngIf="hives.invalid && (hives.dirty || hives.touched)">
+    <div *ngIf="hives.errors.required" class="alert">
+      Number of hives is required.
+    </div>
+  </div>
+  <mat-form-field appearance="standard">
+    <mat-label>No. Hives</mat-label>
+    <input type="number" matInput formControlName="hives" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Close</button>
+  <button mat-raised-button color="primary" (click)="save()">Add</button>
+</mat-dialog-actions>
