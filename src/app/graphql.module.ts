@@ -13,34 +13,6 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   };
 }
 
-export const ALL_COLONIES_QUERY = gql`
-  query AllColoniesQuery {
-    colonies {
-      id
-      hives
-      bees
-    }
-  }
-`;
-
-export interface AllColoniesQueryResponse {
-  colonies: Colony[];
-}
-
-export const CREATE_COLONY_MUTATION = gql`
-  mutation createBees($bees: Int!, $hives: Int!) {
-    insert_colonies(objects: { bees: $bees, hives: $hives }) {
-      returning {
-        id
-      }
-    }
-  }
-`;
-
-export interface CreateColonyMutationResponse {
-  createColony: Colony;
-}
-
 @NgModule({
   providers: [
     {

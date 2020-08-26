@@ -1,1 +1,18 @@
-[]
+- table:
+    schema: public
+    name: collections
+  object_relationships:
+  - name: colony
+    using:
+      foreign_key_constraint_on: colony_id
+- table:
+    schema: public
+    name: colonies
+  array_relationships:
+  - name: collections
+    using:
+      foreign_key_constraint_on:
+        column: colony_id
+        table:
+          schema: public
+          name: collections

@@ -8,6 +8,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   date: any;
+  timestamptz: any;
   uuid: any;
 };
 
@@ -28,6 +29,8 @@ export type Int_Comparison_Exp = {
 export type Collections = {
   __typename?: 'collections';
   amount: Scalars['Int'];
+  /** An object relationship */
+  colony: Colonies;
   colony_id: Scalars['uuid'];
   date: Scalars['date'];
   id: Scalars['uuid'];
@@ -101,6 +104,7 @@ export type Collections_Bool_Exp = {
   _not?: Maybe<Collections_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Collections_Bool_Exp>>>;
   amount?: Maybe<Int_Comparison_Exp>;
+  colony?: Maybe<Colonies_Bool_Exp>;
   colony_id?: Maybe<Uuid_Comparison_Exp>;
   date?: Maybe<Date_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
@@ -120,6 +124,7 @@ export type Collections_Inc_Input = {
 /** input type for inserting data into table "collections" */
 export type Collections_Insert_Input = {
   amount?: Maybe<Scalars['Int']>;
+  colony?: Maybe<Colonies_Obj_Rel_Insert_Input>;
   colony_id?: Maybe<Scalars['uuid']>;
   date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
@@ -184,6 +189,7 @@ export type Collections_On_Conflict = {
 /** ordering options when selecting data from "collections" */
 export type Collections_Order_By = {
   amount?: Maybe<Order_By>;
+  colony?: Maybe<Colonies_Order_By>;
   colony_id?: Maybe<Order_By>;
   date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
@@ -307,8 +313,33 @@ export type Collections_Variance_Order_By = {
 export type Colonies = {
   __typename?: 'colonies';
   bees: Scalars['Int'];
+  /** An array relationship */
+  collections: Array<Collections>;
+  /** An aggregated array relationship */
+  collections_aggregate: Collections_Aggregate;
+  created?: Maybe<Scalars['timestamptz']>;
   hives: Scalars['Int'];
   id: Scalars['uuid'];
+};
+
+
+/** columns and relationships of "colonies" */
+export type ColoniesCollectionsArgs = {
+  distinct_on?: Maybe<Array<Collections_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Collections_Order_By>>;
+  where?: Maybe<Collections_Bool_Exp>;
+};
+
+
+/** columns and relationships of "colonies" */
+export type ColoniesCollections_AggregateArgs = {
+  distinct_on?: Maybe<Array<Collections_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Collections_Order_By>>;
+  where?: Maybe<Collections_Bool_Exp>;
 };
 
 /** aggregated selection of "colonies" */
@@ -381,6 +412,8 @@ export type Colonies_Bool_Exp = {
   _not?: Maybe<Colonies_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Colonies_Bool_Exp>>>;
   bees?: Maybe<Int_Comparison_Exp>;
+  collections?: Maybe<Collections_Bool_Exp>;
+  created?: Maybe<Timestamptz_Comparison_Exp>;
   hives?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
 };
@@ -400,6 +433,8 @@ export type Colonies_Inc_Input = {
 /** input type for inserting data into table "colonies" */
 export type Colonies_Insert_Input = {
   bees?: Maybe<Scalars['Int']>;
+  collections?: Maybe<Collections_Arr_Rel_Insert_Input>;
+  created?: Maybe<Scalars['timestamptz']>;
   hives?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
 };
@@ -408,6 +443,7 @@ export type Colonies_Insert_Input = {
 export type Colonies_Max_Fields = {
   __typename?: 'colonies_max_fields';
   bees?: Maybe<Scalars['Int']>;
+  created?: Maybe<Scalars['timestamptz']>;
   hives?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
 };
@@ -415,6 +451,7 @@ export type Colonies_Max_Fields = {
 /** order by max() on columns of table "colonies" */
 export type Colonies_Max_Order_By = {
   bees?: Maybe<Order_By>;
+  created?: Maybe<Order_By>;
   hives?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
@@ -423,6 +460,7 @@ export type Colonies_Max_Order_By = {
 export type Colonies_Min_Fields = {
   __typename?: 'colonies_min_fields';
   bees?: Maybe<Scalars['Int']>;
+  created?: Maybe<Scalars['timestamptz']>;
   hives?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
 };
@@ -430,6 +468,7 @@ export type Colonies_Min_Fields = {
 /** order by min() on columns of table "colonies" */
 export type Colonies_Min_Order_By = {
   bees?: Maybe<Order_By>;
+  created?: Maybe<Order_By>;
   hives?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
@@ -459,6 +498,8 @@ export type Colonies_On_Conflict = {
 /** ordering options when selecting data from "colonies" */
 export type Colonies_Order_By = {
   bees?: Maybe<Order_By>;
+  collections_aggregate?: Maybe<Collections_Aggregate_Order_By>;
+  created?: Maybe<Order_By>;
   hives?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
@@ -473,6 +514,8 @@ export enum Colonies_Select_Column {
   /** column name */
   Bees = 'bees',
   /** column name */
+  Created = 'created',
+  /** column name */
   Hives = 'hives',
   /** column name */
   Id = 'id'
@@ -481,6 +524,7 @@ export enum Colonies_Select_Column {
 /** input type for updating data in table "colonies" */
 export type Colonies_Set_Input = {
   bees?: Maybe<Scalars['Int']>;
+  created?: Maybe<Scalars['timestamptz']>;
   hives?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
 };
@@ -541,6 +585,8 @@ export type Colonies_Sum_Order_By = {
 export enum Colonies_Update_Column {
   /** column name */
   Bees = 'bees',
+  /** column name */
+  Created = 'created',
   /** column name */
   Hives = 'hives',
   /** column name */
@@ -868,6 +914,20 @@ export type Subscription_RootColonies_By_PkArgs = {
 };
 
 
+/** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
+export type Timestamptz_Comparison_Exp = {
+  _eq?: Maybe<Scalars['timestamptz']>;
+  _gt?: Maybe<Scalars['timestamptz']>;
+  _gte?: Maybe<Scalars['timestamptz']>;
+  _in?: Maybe<Array<Scalars['timestamptz']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['timestamptz']>;
+  _lte?: Maybe<Scalars['timestamptz']>;
+  _neq?: Maybe<Scalars['timestamptz']>;
+  _nin?: Maybe<Array<Scalars['timestamptz']>>;
+};
+
+
 /** expression to compare columns of type uuid. All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
   _eq?: Maybe<Scalars['uuid']>;
@@ -881,14 +941,18 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
-export type AllColoniesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllColoniesAndCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllColoniesQuery = (
+export type GetAllColoniesAndCollectionsQuery = (
   { __typename?: 'query_root' }
   & { colonies: Array<(
     { __typename?: 'colonies' }
-    & Pick<Colonies, 'id' | 'hives' | 'bees'>
+    & Pick<Colonies, 'id' | 'created' | 'hives' | 'bees'>
+    & { collections: Array<(
+      { __typename?: 'collections' }
+      & Pick<Collections, 'id' | 'date' | 'amount'>
+    )> }
   )> }
 );
 
@@ -904,7 +968,47 @@ export type CreateColonyMutation = (
     { __typename?: 'colonies_mutation_response' }
     & { returning: Array<(
       { __typename?: 'colonies' }
-      & Pick<Colonies, 'id' | 'hives' | 'bees'>
+      & Pick<Colonies, 'id' | 'created' | 'hives' | 'bees'>
+      & { collections: Array<(
+        { __typename?: 'collections' }
+        & Pick<Collections, 'id' | 'date' | 'amount'>
+      )> }
+    )> }
+  )> }
+);
+
+export type InsertCollectionMutationVariables = Exact<{
+  amount: Scalars['Int'];
+  colony_id: Scalars['uuid'];
+  date?: Maybe<Scalars['date']>;
+}>;
+
+
+export type InsertCollectionMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_collections_one?: Maybe<(
+    { __typename?: 'collections' }
+    & Pick<Collections, 'id' | 'amount' | 'colony_id' | 'date'>
+    & { colony: (
+      { __typename?: 'colonies' }
+      & Pick<Colonies, 'id'>
+    ) }
+  )> }
+);
+
+export type GetColonyAndCollectionsQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetColonyAndCollectionsQuery = (
+  { __typename?: 'query_root' }
+  & { colonies: Array<(
+    { __typename?: 'colonies' }
+    & Pick<Colonies, 'bees' | 'created' | 'hives' | 'id'>
+    & { collections: Array<(
+      { __typename?: 'collections' }
+      & Pick<Collections, 'amount' | 'date' | 'id'>
     )> }
   )> }
 );

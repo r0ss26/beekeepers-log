@@ -28,9 +28,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # User Stories
 
-- As a user I want to be able to enter the amount of honey I collect from a colony.
+- As a user I want to be able to add a new colony
+- As a user I want to be able to specify the number of bees in a colony
+- As a user I want to be able to specify the number of hives in a colony
+- As a user I want to be able to enter the amount of honey I collected from a colony.
 - As a user I want to be able to enter the date that I collected honey from a colony.
 - As a user I want to be able to add a new hive to a colony.
 - As a user I want to be able to quickly see the date of a colonies next collection. 
-- As a user I want to be able to see the amount of overproduction since the last collection for a colony.
+- As a user I want to be able to see the amount of overproduction since the last collection for a colony so that I know how much honey to collect and whether a new hive is needed.
 - As a user I want to be notified if the amount of overproduction reaches 150grams before the next collection date of the colony.

@@ -18,14 +18,28 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { FutureDatePipe } from './pipes/future-date.pipe'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { NewColonyComponent } from './new-colony/new-colony.component';
 import { NewColonyFormComponent } from './new-colony/new-colony-form/new-colony-form.component';
+import { NewCollectionComponent } from './new-collection/new-collection.component';
+import { NewCollectionFormComponent } from './new-collection/new-collection-form/new-collection-form.component';
+import { ColonyComponent } from './colony/colony.component';
+import { CollectionsHistoryComponent } from './colony/collections-history/collections-history.component';
+import { HivesComponent } from './hives/hives.component'
+import { UpcomingCollectionsComponent } from './upcoming-collections/upcoming-collections.component';
+import { NewHiveComponent } from './new-hive/new-hive.component'
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'colonies', component: ColoniesComponent },
+  { path: 'colonies/:id', component: ColonyComponent },
 ];
 
 @NgModule({
@@ -36,6 +50,14 @@ const appRoutes: Routes = [
     ColoniesComponent,
     NewColonyComponent,
     NewColonyFormComponent,
+    FutureDatePipe,
+    NewCollectionComponent,
+    NewCollectionFormComponent,
+    ColonyComponent,
+    CollectionsHistoryComponent,
+    HivesComponent,
+    UpcomingCollectionsComponent,
+    NewHiveComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +72,11 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatTabsModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],
