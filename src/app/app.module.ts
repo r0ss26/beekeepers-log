@@ -7,6 +7,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     MatCardModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],

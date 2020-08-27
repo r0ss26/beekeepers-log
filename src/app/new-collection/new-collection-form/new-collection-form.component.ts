@@ -10,9 +10,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class NewCollectionFormComponent implements OnInit {
 
   newCollectionForm = new FormGroup({
-    amount: new FormControl('', [Validators.required]),
+    amount: new FormControl('', [Validators.required, Validators.min(1)]),
     date: new FormControl(new Date()),
-    newHives: new FormControl()
+    newHives: new FormControl('', [Validators.min(1)])
   })
 
   get amount() { return this.newCollectionForm.get('amount')}
