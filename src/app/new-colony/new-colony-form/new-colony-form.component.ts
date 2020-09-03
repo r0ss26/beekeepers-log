@@ -10,8 +10,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class NewColonyFormComponent implements OnInit {
   newColonyForm = new FormGroup({
-    bees: new FormControl('100', [Validators.required, Validators.min(1)]),
-    hives: new FormControl('1', [Validators.required, Validators.min(1)])
+    bees: new FormControl(100, [Validators.required, Validators.min(1)]),
+    hives: new FormControl(1, [Validators.required, Validators.min(1)])
   })
 
   get bees() { return this.newColonyForm.get('bees')}
